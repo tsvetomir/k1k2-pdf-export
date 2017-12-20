@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import $ from 'jquery';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-root',
