@@ -4,7 +4,6 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
-import 'jquery';
 import '@progress/kendo-ui';
 
 
