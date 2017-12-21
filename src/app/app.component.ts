@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Http } from '@angular/http';
 import $ from 'jquery';
 
 @Component({
@@ -7,13 +8,22 @@ import $ from 'jquery';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
+  private data: any;
+
+  constructor(private http: Http) {
+    this.http.get('./assets/us.geo.json')
+      .subscribe(res => {
+        this.data = res.json();
+        this.createMap();
+      });
+  }
+
   ngAfterViewInit(): void {
     this.createGauge();
-    this.createMap();
   }
 
   createGauge(): void {
-    $('#gauge').kendoLinearGauge({
+    $('#gauge').kendoRadialGauge({
       pointer: {
         value: 28
       },
@@ -45,14 +55,23 @@ export class AppComponent implements AfterViewInit {
 
   createMap(): any {
     $('#map').kendoMap({
-      center: [30.268107, -97.744821],
-      zoom: 3,
+      type: 'map',
+      center: [39.6924, -97.3370],
+      zoom: 3.8,
+      zoomable: false,
       layers: [{
-        type: 'tile',
-        urlTemplate: 'http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png',
-        subdomains: ['a', 'b', 'c'],
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap contributors</a>'
-      }]
+        type: 'shape',
+        dataSource: this.data.features,
+        style: {
+          stroke: {
+            color: '#A3A396'
+          },
+          fill: {
+            color: '#fff5c8'
+          }
+        }
+      },
+      ],
     });
   }
 }

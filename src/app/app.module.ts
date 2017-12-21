@@ -8,6 +8,7 @@ import '@progress/kendo-ui';
 
 
 import { AppComponent } from './app.component';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     BrowserAnimationsModule,
     ChartsModule,
